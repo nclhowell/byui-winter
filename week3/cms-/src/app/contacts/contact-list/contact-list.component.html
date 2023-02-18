@@ -1,0 +1,49 @@
+<!-- <p>contact-list works!</p> -->
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-8">
+        Contacts
+      </div>
+        <app-contact-item `
+          *ngFor="let contact of contacts"
+          [contact]="contact"
+        >
+     ` </app-contact-item>
+      </div>
+    </div>
+  </div>
+
+<!-- <div class="pull-center" *ngFor="let contact of contacts">
+          <p class="list-group-item-text">{{ contact.name }}</p>
+            <img
+                src="{{ contact.imagePath }}"
+                alt="{{ contact.name }}"
+                class="img-responsive"
+                style="max-height: 50px"
+              />
+        </div> -->
+
+<!-- <div class="row">
+        <div class="col-xs-8">
+          <a
+            href="#"
+            class="list-group-item clearfix"
+            *ngFor="let contact of contacts"
+          >
+            <span class="pull-right">
+              <img
+                src="{{ contact.imagePath }}"
+                alt="{{ contact.name }}"
+                class="img-responsive"
+                style="max-height: 50px"
+              />
+            </span>
+            <div class="pull-center">
+              <p class="list-group-item-text">{{ contact.name }}</p>
+            </div>
+          </a>
+        </div>
+      </div> -->
+
+<!-- (recipeSelected)="onRecipeSelected(recipeEl)" -->
