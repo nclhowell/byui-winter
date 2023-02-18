@@ -1,0 +1,1 @@
+{"ast":null,"code":"var Ingredient = /** @class */function () {\n  function Ingredient(name, amount) {\n    this.name = name;\n    this.amount = amount;\n  }\n  return Ingredient;\n}();\nexport { Ingredient };","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,7 @@
+<h3>*This remains the newcomp component*</h3>
+<h3
+  [ngClass]="{ serverup: serverStatus === 'up' }"
+  [ngStyle]="{ backgroundColor: getColor() }"
+>
+  Looks like {{ "Server" }} with ID {{ serverId }} is {{ getServerStatus() }}
+</h3>
