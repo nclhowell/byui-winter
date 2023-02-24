@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Contacts';
+  loadedFeature = 'documents';
+
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
+  }
+
 }
