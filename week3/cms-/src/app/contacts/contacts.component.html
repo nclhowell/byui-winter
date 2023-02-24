@@ -1,13 +1,48 @@
 <!-- <div class="container"> -->
   <div class="row">
-    <div class="col-md-7">
-        <!-- <app-contact-item  *ngFor="let contact of contacts">
-        [contacts]="contact"
-        <p>{{contact.name}}</p></app-contact-item> -->
-    </div>
     <div class="col-md-5">
-       <app-contact-list></app-contact-list>
+    </div>
+    <div class="col-md-7">
+       <!-- <app-recipe-list
+      (recipeWasSelected)="selectedRecipe = $event"></app-recipe-list> -->
+
+       <app-contact-list (contactWasSelected)="selectedContact = $event"></app-contact-list>
+
+        <app-contact-detail
+      *ngIf="selectedContact; else infoText"
+      [contact]="selectedContact"></app-contact-detail>
+    <ng-template #infoText>
+      <p>Please select a Contact</p>
+    </ng-template>
+
+    <!-- <app-contact-detail></app-contact-detail> -->
+<!--
+       <app-contact-detail
+       *ngIf="selectedContact; else infoText"
+       [contact]="selectedContact"></app-contact-detail>
+       <ng-template #infoText>
+        <p>Please select a Contact</p>
+       </ng-template> -->
+
+       <!-- [contact]="selectedContact"> -->
+
+        <!-- <app-contact-detail></app-contact-detail> -->
+<!--
+        <app-contact-detail></app-contact-detail>
+       <app-contact-detail
+       *ngIf="selectedContact; else infoText"
+       [contact]="contactSelected"></app-contact-detail> -->
+
        <!-- <app-contact-detail></app-contact-detail> -->
+
+       <!-- <app-contact-detail   *ngIf="selectedContact; else infoText"
+       [recipe]="selectedRecipe">></app-contact-detail> -->
+        <!-- <app-recipe-detail
+      *ngIf="selectedRecipe; else infoText"
+      [recipe]="selectedRecipe"></app-recipe-detail>
+    <ng-template #infoText>
+      <p>Please select a Recipe!</p>
+    </ng-template> -->
       <!-- <app-contact-item></app-contact-item> -->
     </div>
   </div>
