@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Message } from './message.model';
 
 @Component({
   selector: 'app-messages',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./messages.component.css']
 })
 export class MessagesComponent {
+  selectedMessage: Message;
+  messages = [];
 
 }
