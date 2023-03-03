@@ -19,7 +19,10 @@
         </div>
       </div>
       <div class="panel-footer">
-        <app-message-edit></app-message-edit>
+        <!-- <app-message-edit></app-message-edit> -->
+           <app-message-edit
+        (messageAdded)="onMessageAdded($event)"></app-message-edit>
+          <hr>
       </div>
     </div>
   </div>

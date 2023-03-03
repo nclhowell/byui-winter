@@ -5,11 +5,12 @@
       (messageWasSelected)="selectedMessage = $event"
     ></app-message-list>
     <app-message-detail
-      *ngIf="selectedMessage; else infoText"
+      *ngIf="selectedMessage"
       [message]="selectedMessage"
     ></app-message-detail>
-    <ng-template #infoText>
+    <!-- <ng-template #infoText>
       <p>Please select a Message</p>
-    </ng-template>
+    </ng-template> -->
   </div>
 </div>
+      <!-- *ngIf="selectedMessage; else infoText" -->
