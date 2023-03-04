@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-5"></div>
+  <div class="col-md-7">
+    <app-message-list
+      (messageWasSelected)="selectedMessage = $event"
+    ></app-message-list>
+    <app-message-detail
+      *ngIf="selectedMessage"
+      [message]="selectedMessage"
+    ></app-message-detail>
+    <!-- <ng-template #infoText>
+      <p>Please select a Message</p>
+    </ng-template> -->
+  </div>
+</div>
+      <!-- *ngIf="selectedMessage; else infoText" -->

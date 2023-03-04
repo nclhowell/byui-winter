@@ -1,0 +1,27 @@
+<div class="row col-md-6">
+    <app-document-list
+      (documentWasSelected)="selectedDocument = $event"
+    ></app-document-list>
+  </div>
+  <div class="row col-md-6">
+    <app-document-detail
+      *ngIf="selectedDocument; else infoText"
+      [document]="selectedDocument"
+    ></app-document-detail>
+    <ng-template #infoText>
+      <!-- <p>Please select a Document</p> -->
+    </ng-template>
+  </div>
+
+
+<!-- <div class="row">
+  <div class="col-md-5">
+  <app-document-list></app-document-list>
+  </div>
+
+<div class="col-md-4">
+  <app-document-detail></app-document-detail>
+Add tag to load the DocumentDetailComponent here
+</div>
+</div> -->
+

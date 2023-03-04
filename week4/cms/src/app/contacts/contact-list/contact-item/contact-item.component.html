@@ -1,0 +1,28 @@
+<a
+  href="#"
+  class="list-group-item clearfix"
+  (click)="onSelected()">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ contact.name }}</h4>
+  </div>
+  <span class="pull-right">
+        <img
+          [src]="contact.imagePath"
+          alt="{{ contact.name }}"
+          class="img-responsive"
+          style="max-height: 50px;">
+      </span>
+</a>
+ <!-- <a href="#" class="list-group-item clearfix">
+  <span class="pull-right">
+    <img
+      src="{{ contacts.imagePath }}"
+      alt="{{ contacts.name }}"
+      class="img-responsive"
+      style="max-height: 50px"
+    />
+  </span>
+  <div class="pull-center">
+    <p class="list-group-item-text">{{ contacts.name }}</p>
+  </div>
+</a> -->
