@@ -1,0 +1,26 @@
+<!-- <p>contact-list works!</p> -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row pad-left-right">
+      <!-- <span class="pull-left title" routerLinkActive="active">Documents
+      </span> -->
+      <a
+        class="btn btn-success pull-right"
+        routerLinkActive="active"
+        routerLink="new"
+        >Add Contact</a
+      >
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-8">
+        <app-contact-item
+          *ngFor="let contactEl of contacts"
+          [contact]="contactEl"
+        >
+        </app-contact-item>
+      </div>
+    </div>
+  </div>
+</div>

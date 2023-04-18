@@ -1,0 +1,63 @@
+
+<div class="panel panel-default pull-right" xmlns="http://www.w3.org/1999/html">
+  <div class="panel-heading">
+    <div class="row pad-all">
+      <h4 class="title margin-left-right">{{document?.name}}</h4>
+      <div class="row pull-right margin-left-right">
+        <a class="btn btn-primary" routerLinkActive="active" routerLink="new" (click)="onView()">View</a>
+        <a class="btn btn-info" routerLinkActive="active" routerLink="../:id/edit">Edit</a>
+        <a class="btn btn-danger" routerLinkActive="active" routerLink="/documents" (click)="onDelete()" >Delete</a>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="pad-left-right">
+      <div class="row">
+        <label>Description:</label>
+      <br>
+        <span class="label-value"> {{ document.description}}</span>
+      </div>
+      <br>
+      <div class="row">
+        <label>URL:</label>
+      <br>
+        <span class="label-value"> {{document.url}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-xs-12">
+      <h1>{{ document.name }}</h1>
+      <span class="pull-left">
+        <img
+          [src]="document.description"
+          alt="{{ document.name }}"
+          class="img-responsive"
+          style="max-height: 100px"
+        />
+      </span>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="col-sm-7"></div>
+    <button class="btn btn-primary pull-right" type="button">Edit</button>
+    <button class="btn btn-danger pull-right" type="button">Delete</button>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div layout="row" class="panel-body">
+    <form class="form-horizontal">
+      <div class="mx-auto">
+        <h4>{{ "Name: " + document.name }}</h4>
+        <h4>{{ "Description: " + document.description }}</h4>
+      </div>
+      <div class="form-group">
+      </div>
+    </form>
+  </div>
+</div> -->
+
