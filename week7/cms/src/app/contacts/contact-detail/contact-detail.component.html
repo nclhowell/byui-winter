@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="col-xs-12">
+      <h1>{{ contact.name }}</h1>
+      <span class="pull-left">
+        <img
+          [src]="contact.imageUrl"
+          alt="{{ contact.name }}"
+          class="img-responsive"
+          style="max-height: 100px"
+        />
+      </span>
+    </div>
+    <br />
+    <br />
+    <br />
+    <div class="col-sm-7"></div>
+         <a class="btn btn-info pull-right" routerLinkActive="active" routerLink="../:id/edit">Edit</a>
+        <a class="btn btn-danger pull-right" routerLinkActive="active" routerLink="/contacts" (click)="onDelete()">Delete</a>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div layout="row" class="panel-body">
+    <form class="form-horizontal">
+      <div class="mx-auto">
+        <h4>{{ "Email: " + contact.email }}</h4>
+        <h4>{{ "Phone: " + contact.phone }}</h4>
+      </div>
+      <div class="form-group">
+      </div>
+    </form>
+  </div>
+</div>
