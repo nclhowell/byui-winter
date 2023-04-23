@@ -1,0 +1,174 @@
+
+// npm install --skipLibCheck --save ng2-dnd@5.0.2 --force
+
+1. Check the weekly announcement, because there has been an update to angular that requires a different version of the drag and drop. You need to run the command:
+
+npm install --skipLibCheck --save ng2-dnd@5.0.2 --force
+
+/* You also need to have a Node version of 16 or higher. (You can check your version with node -v)
+
+2. Make sure you added the imports in the app.module.ts (This is in the instructions, but a vital step.)
+
+3.  In your contact-edit.component.html and contact-list.component.html files make sure that you spell the stuff highlighted in yellow correctly. I left off one of the Ps in dnd-droppable and it was giving me an error.
+
+4. If your components are named app instead of cms like mine when you copied the HTML from the files in the instructions to the contact-edit.component.html file you added a <cms-contact-item> tag that needs to be changed to <app-contact-item> or whatever you named it when you created it.
+
+5. In your contact-list-component.html file in the <app-contact-item> tag (or cms-contact-item) on part where it says [dragData]="contact" you may need to change this depending on what you named the contact in your *ngFor statement. Ex. I named mine contactEl, so I had to change it to [dragData]="contactEl"
+
+6. If you are still having problems you can try to narrow out where they are coming from by using console.log("Your test message"); in your contact-edit.component.ts file to see how far it is getting before it breaks and to check the values of the contact and contactsGroup.*/
+
+// Refactorer: Fred Okorio
+// On: Implementing the Behavior of the Document Edit Form
+
+
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+// CONFIRM THE CLASS NAME
+import { DocumentsServiceService } from '../documents-service.service';
+import { Documents } from '../documents.model';
+
+@Component({
+  selector: 'app-documents-edit',
+  templateUrl: './documents-edit.component.html',
+  styleUrls: ['./documents-edit.component.css']
+})
+export class DocumentsEditComponent implements OnInit {
+
+  // Define the properties for the component
+  originalDocument: Document; // References the original, unedited version of the document
+  document: Document; // References the edited version of the document displayed in the form
+  editMode: boolean = false; // Indicates whether an existing document is being edited, or a new document is being created
+
+  // id!: number;
+  // editMode: boolean = false;
+  // document!: Documents;
+  // originalDocument!: Documents;
+
+  constructor(
+    private route: ActivatedRoute, 
+    private router: Router,
+    // you have bug here --YOU USED documentsService
+    // private documentService: DocumentsServiceService
+    private documentsService: DocumentsServiceService
+    ){
+
+  }
+
+  ngOnInit(): void {
+    // subscribe to changes in the route parameters
+    this.route.params.subscribe((params: Params) => {
+      // get the 'id' parameter from the params object
+      const id = params['id'];
+  
+      // if the 'id' parameter is undefined or null
+      if (!id) {
+        // set editMode to false and exit the function
+        this.editMode = false;
+        return;
+      }
+  
+      // get the original document with the specified 'id'
+      const originalDocument = this.documentsService.getDocument(id);
+      
+      // if no document was found with that 'id'
+      if (!originalDocument) {
+        // exit the function
+        return;
+      }
+  
+      // if a document was found with the specified 'id'
+      // set editMode to true
+      this.editMode = true;
+  
+      // create a deep copy of the original document and store it in the 'document' property
+      // to avoid modifying the original document by reference
+      this.document = JSON.parse(JSON.stringify(originalDocument));
+    });
+  }
+
+  onSubmit(form: NgForm) {
+    // get values from form's fields
+    const value = form.value;
+    
+    // create a new document
+    const newDocument = new Document();
+  
+    // assign the values in the form fields to the corresponding properties in the newDocument
+    newDocument.name = value.name;
+    newDocument.description = value.description;
+    newDocument.url = value.url;
+  
+    // check if we are in edit mode
+    if (this.editMode) {
+      // if we are in edit mode, update the original document with the new document
+      this.documentsService.updateDocument(this.originalDocument, newDocument);
+    } else {
+      // if we are not in edit mode, add the new document to the document service
+      this.documentsService.addDocument(newDocument);
+    }
+    
+    // navigate back to the '/documents' URL
+    this.router.navigate(['/documents']);
+  }
+  
+
+  // WHAT ARE THESE METHODS FOR?
+
+  // onEditContact() {
+  //   this.router.navigate(['edit'], {relativeTo: this.route});
+  // }
+
+  // onDelete() {
+  //   this.documentService.deleteDocument(this.document);
+  //   this.router.navigate(['documents'], {relativeTo: this.route})
+  // }
+
+  // onCancel(){
+  //   this.router.navigate(['/documents'], {relativeTo: this.route});
+  // }
+
+  // onAddItem(form: NgForm) {
+  //   const  value = form.value;
+  //   const newDocument = new Documents(value.id, value.name, value.description, value.url, value.children);
+  //   if(this.editMode = true){
+  //     // TYPE HERE!
+  //     this.documentService.updateDocument(this.originalDocument, newDocument);
+  //     console.log('add documnt in edit works')
+  //   } else{
+  //     // typo here! --you used documentsService from the import 
+  //       this.documentService.addDocument(newDocument);
+  //       this.router.navigate(['edit'], {relativeTo: this.route});
+  //       console.log('else is tiggered')
+  //   }
+  // }
+ 
+//   ngOnInit(){
+//       this.route.params
+//         .subscribe(
+//           (params: Params) => {
+//             this.id = +params['id'];
+//             this.editMode = params['id'] !=null;
+//             console.log(this.editMode);
+//           }
+//         );
+
+//       this.route.params
+//         .subscribe(
+//           (params: Params)=>{
+//             this.id = params['id'];
+//             this.editMode = params['id'] !=null;
+//             if (!this.id){
+//               return;
+//               // typo here! --you used documentsService from the import
+//             } this.originalDocument = this.documentService.getSingleDocument(this.id);
+//             if(!this.originalDocument){
+//               return;
+//             } this.editMode = true;
+//               this.document = JSON.parse(JSON.stringify(this.originalDocument)); 
+//           }
+//         )
+//   }
+
+// }
+}

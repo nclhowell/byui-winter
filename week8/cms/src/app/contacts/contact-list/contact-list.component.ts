@@ -1,0 +1,35 @@
+import { Component, OnInit} from '@angular/core';
+import { Contact } from '../contact.model';
+import { ContactService } from '../contact.service';
+import { Subscription } from 'rxjs';
+// import { ContactItem } from '../contact';
+
+@Component({
+  selector: 'app-contact-list',
+  templateUrl: './contact-list.component.html',
+  styleUrls: ['./contact-list.component.css'],
+})
+export class ContactListComponent implements OnInit {
+  contacts: Contact[];
+  ContactListChangedSubscription: Subscription;
+
+constructor(private contactService: ContactService) {
+    }
+
+ngOnInit() {
+  this.contacts = this.contactService.getContacts();
+      this.ContactListChangedSubscription = this.contactService.ContactListChanged
+      .subscribe(
+        (contact: Contact[]) => {
+          this.contacts = contact;
+        }
+      )
+}
+
+// onSelected(contact: Contact) {
+//    this.contactService.contactSelectedEvent.emit(contact);
+//    console.log(contact);
+// }
+
+
+  }
