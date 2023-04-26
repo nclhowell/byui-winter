@@ -1,0 +1,57 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <span class="title pad-left-right">Contacts</span>
+    </div>
+    <div class="row">
+      <div class="input-group pull-left pad-left-right col-xs-7">
+        <input
+          class="form-control"
+          #searchBox
+          (keyup)="search(searchBox.value)"
+          placeholder="Enter a search value"
+        />
+        <div
+          class="glyphicon glyphicon-search input-group-addon"
+          (click)="search(searchBox.value)"
+        ></div>
+      </div>
+    </div>
+    <div class="row">
+    <div class="pull-right pad-leftright">
+      <a class="btn btn-success" [routerLink]="['new']">New Contact</a>
+    </div>
+  </div>
+</div>
+
+<div class="panel-body">
+  <div class="row">
+    <div class="col-xs-8">
+      <app-contact-item
+      *ngFor="let contactEl of contacts |  contactsFilter: term"
+      [contact]="contactEl"
+    >
+    </app-contact-item>
+    </div>
+  </div>
+</div>
+
+<!-- <li
+          class="list-group-item"
+          *ngFor="let server of servers | filter:filteredStatus:'status' | sort:'name'"
+          [ngClass]="getStatusClasses(server)"> -->
+<!-- <div class="panel-heading">
+    <div class="row pad-left-right">
+      <a
+        class="btn btn-success pull-right"
+        routerLinkActive="active"
+        routerLink="new"
+        >Add Contact</a
+      >
+    </div>
+  </div>  -->
+<!-- Add the search box input field here -->
+<!-- <div
+          class="glyphicon glyphicon-search input-group-addon"
+          (click)="search(searchBox.value)"
+        ></div> -->

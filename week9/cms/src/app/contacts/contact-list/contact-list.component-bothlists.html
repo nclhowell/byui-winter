@@ -1,0 +1,29 @@
+<!-- <p>contact-list works!</p> -->
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <div class="row">
+      <div class="col-xs-8">
+        <a
+          href="#"
+          class="list-group-item clearfix"
+          *ngFor="let contact of contacts"
+        >
+          <span class="pull-right">
+            <img
+              src="{{ contact.imagePath }}"
+              alt="{{ contact.name }}"
+              class="img-responsive"
+              style="max-height: 50px"
+            />
+          </span>
+          <div class="pull-center">
+            <p class="list-group-item-text">{{ contact.name }}</p>
+          </div>
+        </a>
+        <app-contact-item *ngFor="let contact of contacts" [contacts]="contact">
+        </app-contact-item>
+      </div>
+    </div>
+  </div>
+</div>
