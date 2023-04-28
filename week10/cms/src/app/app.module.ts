@@ -4,7 +4,7 @@ import { FormsModule} from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DndModule } from 'ng2-dnd';
+// import { DndModule } from 'ng2-dnd';
 import { HeaderComponent } from './header/header.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactListComponent } from './contacts/contact-list/contact-list.component';
