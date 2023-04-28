@@ -1,0 +1,1 @@
+{"ast":null,"code":"var Recipe = /** @class */function () {\n  function Recipe(name, desc, imagePath) {\n    this.name = name;\n    this.description = desc;\n    this.imagePath = imagePath;\n  }\n  return Recipe;\n}();\nexport { Recipe };","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
