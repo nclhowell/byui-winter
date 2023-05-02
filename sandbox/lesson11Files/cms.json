@@ -1,0 +1,49 @@
+[{
+  "_id": {
+    "$oid": "644c83e7955347599987c5e2"
+  },
+  "id": "1",
+  "subject": "CIT 366 assignment 1",
+  "msgText": "The grades for this assignment have been posted.",
+  "sender": "7"
+},{
+  "_id": {
+    "$oid": "644c83e7955347599987c5e3"
+  },
+  "id": "2",
+  "subject": "CIT 366 assignment 3",
+  "msgText": "When is assignment 3 due?",
+  "sender": "13"
+},{
+  "_id": {
+    "$oid": "644c83e7955347599987c5e4"
+  },
+  "id": "3",
+  "subject": "CIT 366 assignment 3 due date",
+  "msgText": "Assignment 3 is due on Saturday at 11:30 PM.",
+  "sender": "7"
+},{
+  "_id": {
+    "$oid": "644c83e7955347599987c5e5"
+  },
+  "id": "4",
+  "subject": "Assignment 3 help",
+  "msgText": "Can I meet with you sometime? I need help with assignment 3.",
+  "sender": "3"
+},{
+  "_id": {
+    "$oid": "644c83e7955347599987c5e6"
+  },
+  "id": "5",
+  "subject": "Assignment 3 help",
+  "msgText": "I can meet with you today at 4:00 PM in my office.",
+  "sender": "7"
+},{
+  "_id": {
+    "$oid": "644c8933955347599987c5f0"
+  },
+  "id": "101",
+  "subject": "workload is so high!!",
+  "msgText": "Lets ride bikes and work it off",
+  "sender": "58cac77b4690c438e0976b0b"
+}]
