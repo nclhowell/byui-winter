@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+const cors = require('cors');
 
 // import the routing file to handle the default (index) route
 var index = require('./server/routes/app');
@@ -38,8 +39,8 @@ app.use(cookieParser());
 app.use(logger('dev')); // Tell express to use the Morgan logger
 
 // Add support for CORS
+app.use(cors());
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -48,6 +49,7 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Methods',
     'GET, POST, PATCH, PUT, DELETE, OPTIONS'
   );
+  res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
 

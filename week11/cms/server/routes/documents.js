@@ -6,15 +6,22 @@ const Document = require('../models/document');
 module.exports = router;
 
 //Get
-// router.get('/', (req, res, next) => {
-//   const document = new document.find();
-//       .then(result => {
-//           res.status(204).json({
-//             document = new document.find()
-//             message: 'Document updated successfully'
-//           })
-//         })
-//   })
+ router.get('/', (req, res, next) => {
+ Document.find()
+      .then(documents => {
+          res.status(200).json({
+           // message: 'Document snagged successfully',
+            documents: documents
+          })
+         })
+         .catch(error => {
+          res.status(500).json({
+            message: 'Broken Document Fetch',
+            error: error
+
+          });
+         });
+   });
 
 //Post
 router.post('/', (req, res, next) => {

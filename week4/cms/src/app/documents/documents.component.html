@@ -1,9 +1,9 @@
-<div class="row col-md-6">
+<div class="row col-md-7">
     <app-document-list
       (documentWasSelected)="selectedDocument = $event"
     ></app-document-list>
   </div>
-  <div class="row col-md-6">
+  <div class="row col-md-5">
     <app-document-detail
       *ngIf="selectedDocument; else infoText"
       [document]="selectedDocument"

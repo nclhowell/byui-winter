@@ -18,6 +18,8 @@ export class DocumentListComponent implements OnInit{
  ngOnInit() {
     // this.documentService.getDocuments();
     this.documents = this.documentService.getDocuments();
+    console.log(this.documents);
+
     this.DocumentListChangedSubscription = this.documentService.documentListChanged
       .subscribe(
         (document: Document[]) => {
