@@ -10,7 +10,7 @@ module.exports = router;
  Document.find()
       .then(documents => {
           res.status(200).json({
-           // message: 'Document snagged successfully',
+          message: 'Document snagged successfully',
             documents: documents
           })
          })

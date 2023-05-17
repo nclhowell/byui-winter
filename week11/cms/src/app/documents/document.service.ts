@@ -10,11 +10,11 @@ import { response } from 'express';
   providedIn: 'root',
 })
 export class DocumentService {
- // mongoURIdocsArray: string = "https://wdd430cms0-default-rtdb.firebaseio.com/documents.json";
+  // mongoURIdocsArray: string = "https://wdd430cms0-default-rtdb.firebaseio.com/documents.json";
   mongoURIdocsArray: string = 'http://localhost:3000/documents';
-  jsondocs: Document[] = [];
-   docsArray: Document[] = [];
-  // docsArray: Document[] = MOCKDOCUMENTS;
+ // jsondocs: Document[] = [];
+ docsArray: Document[] = [];
+ //  docsArray: Document[] = MOCKDOCUMENTS;
   documentSelectedEvent = new EventEmitter<Document>();
   documentChangedEvent = new EventEmitter<Document[]>();
   documentListChanged = new Subject<Document[]>();
@@ -22,7 +22,7 @@ export class DocumentService {
 
   constructor(private httpClient: HttpClient) {
   // this.docsArray = MOCKDOCUMENTS;
-  this.docsArray = this.getDocuments();
+ // this.docsArray = this.getDocuments();
 }
   // console.log('Constructor mongoDocs =', this.docsArray);
   //  this.jsondocs = this.getDocuments();
@@ -61,22 +61,22 @@ export class DocumentService {
 
   getDocuments() {
     this.httpClient
-      .get<Document[]>(this.mongoURIdocsArray)
+      .get<{message: string, documents: Document[]}>(this.mongoURIdocsArray)
       // .get<Document[]>(this.mongoURIdocsArray)
       .subscribe((docs) => {
-       this.docsArray = docs;
+       this.docsArray = docs.documents;
        //console.log("getDocuuments mongoDocs =", this.docsArray.slice());
-       //  this.maxDocumentId = this.getMaxDocumentId();
+         this.maxDocumentId = this.getMaxDocumentId();
        // Alphabetical Sort
-        // this.docsArray.sort((a, b) => {
-        //   if (a.name < b.name) {
-        //     return -1;
-        //   }
-        //   if (a.name > b.name) {
-        //     return 1;
-        //   }
-        //   return 0;
-        // });
+        this.docsArray.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
         // console.log("Returned:", this.docsArray);
         console.log(this.docsArray);
         this.documentListChanged.next(this.docsArray.slice());
