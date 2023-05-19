@@ -48,8 +48,8 @@ SequenceGenerator.prototype.nextId = function(collectionType) {
       return -1;
   }
 
-  // Sequence.update({_id: sequenceId}, {$set: updateObject},
-  Sequence.updateQuery({_id: sequenceId}, {$set: updateObject},
+  Sequence.update({_id: sequenceId}, {$set: updateObject},
+ // Sequence.updateQuery({_id: sequenceId}, {$set: updateObject},
     function(err) {
       if (err) {
         console.log("nextId error = " + err);

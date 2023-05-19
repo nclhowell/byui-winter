@@ -13,7 +13,7 @@ export class DocumentService {
   // mongoURIdocsArray: string = "https://wdd430cms0-default-rtdb.firebaseio.com/documents.json";
   mongoURIdocsArray: string = 'http://localhost:3000/documents';
  // jsondocs: Document[] = [];
- docsArray: Document[] = [];
+ documents: Document[] = [];
  //  docsArray: Document[] = MOCKDOCUMENTS;
   documentSelectedEvent = new EventEmitter<Document>();
   documentChangedEvent = new EventEmitter<Document[]>();
@@ -64,11 +64,11 @@ export class DocumentService {
       .get<{message: string, documents: Document[]}>(this.mongoURIdocsArray)
       // .get<Document[]>(this.mongoURIdocsArray)
       .subscribe((docs) => {
-       this.docsArray = docs.documents;
+       this.documents = docs.documents;
        //console.log("getDocuuments mongoDocs =", this.docsArray.slice());
          this.maxDocumentId = this.getMaxDocumentId();
        // Alphabetical Sort
-        this.docsArray.sort((a, b) => {
+        this.documents.sort((a, b) => {
           if (a.name < b.name) {
             return -1;
           }
@@ -78,16 +78,16 @@ export class DocumentService {
           return 0;
         });
         // console.log("Returned:", this.docsArray);
-        console.log(this.docsArray);
-        this.documentListChanged.next(this.docsArray.slice());
+        console.log(this.documents);
+        this.documentListChanged.next(this.documents.slice());
       });
      // console.log(this.docsArray.slice());
      // console.log("Returned Slice:", this.docsArray);
-     return this.docsArray.slice();
+     return this.documents.slice();
   }
 
   getDocument(id: string): Document {
-    for (const document of this.docsArray) {
+    for (const document of this.documents) {
       if (document.id == id) {
         //console.log("found!")
         return document;
@@ -108,13 +108,13 @@ export class DocumentService {
     // add to database
     this.httpClient
       .post<{ message: string; document: Document }>(
-        'http://localhost:3000/docsArray',
+        'http://localhost:3000/documents',
         document,
         { headers: headers }
       )
       .subscribe((responseData) => {
         // add new document to docsArray
-        this.docsArray.push(responseData.document);
+        this.documents.push(responseData.document);
         this.sortAndSend();
       });
   }
@@ -150,7 +150,7 @@ export class DocumentService {
       return;
     }
 
-    const pos = this.docsArray.findIndex((d) => d.id === originalDocument.id);
+    const pos = this.documents.findIndex((d) => d.id === originalDocument.id);
 
     if (pos < 0) {
       return;
@@ -165,12 +165,12 @@ export class DocumentService {
     // update database
     this.httpClient
       .put(
-        'http://localhost:3000/docsArray/' + originalDocument.id,
+        'http://localhost:3000/documents/' + originalDocument.id,
         newDocument,
         { headers: headers }
       )
       .subscribe((response: Response) => {
-        this.docsArray[pos] = newDocument;
+        this.documents[pos] = newDocument;
         this.sortAndSend();
       });
   }
@@ -192,7 +192,7 @@ export class DocumentService {
       return;
     }
 
-    const pos = this.docsArray.findIndex((d) => d.id === document.id);
+    const pos = this.documents.findIndex((d) => d.id === document.id);
 
     if (pos < 0) {
       return;
@@ -200,9 +200,9 @@ export class DocumentService {
 
     // delete from database
     this.httpClient
-      .delete('http://localhost:3000/docsArray/' + document.id)
+      .delete('http://localhost:3000/documents/' + document.id)
       .subscribe((response: Response) => {
-        this.docsArray.splice(pos, 1);
+        this.documents.splice(pos, 1);
         this.sortAndSend();
       });
   }
@@ -210,7 +210,7 @@ export class DocumentService {
   getMaxDocumentId(): number {
     //return this.docsArray.sort(d=>d.id)[0];
     let maxId = 0;
-    for (const document of this.docsArray) {
+    for (const document of this.documents) {
       if (+document.id > maxId) {
         maxId = +document.id;
       }
@@ -220,17 +220,17 @@ export class DocumentService {
 
   storeDocuments() {
     this.httpClient
-      .put(this.mongoURIdocsArray, JSON.stringify(this.docsArray), {
+      .put(this.mongoURIdocsArray, JSON.stringify(this.documents), {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       })
       .subscribe({
-        next: () => this.documentListChanged.next(this.docsArray.slice()),
+        next: () => this.documentListChanged.next(this.documents.slice()),
         error: (evar) => console.error('Error saving docsArray: ', evar),
       });
   }
 
   sortAndSend() {
-    this.docsArray.sort((a, b) => {
+    this.documents.sort((a, b) => {
       if (a.name < b.name) {
         return -1;
       }
@@ -239,6 +239,6 @@ export class DocumentService {
       }
       return 0;
     });
-    this.documentListChanged.next(this.docsArray.slice());
+    this.documentListChanged.next(this.documents.slice());
   }
 }
