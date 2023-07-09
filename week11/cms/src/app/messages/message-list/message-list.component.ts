@@ -14,7 +14,6 @@ export class MessageListComponent implements OnInit {
 
   messages: Message[];
   blahstring: string;
-  contacts: ContactService;
 
   constructor(private msgService: MessageService
     ) {}
@@ -23,7 +22,7 @@ export class MessageListComponent implements OnInit {
     this.messages = this.msgService.getMessages();
     this.msgService.messageListChanged.subscribe((messages: Message[]) => {
       this.messages = messages;
-      console.log(this.messages);
+      // console.log(this.messages);
     });
   }
 }

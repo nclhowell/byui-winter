@@ -13,6 +13,7 @@ export class ContactDetailComponent implements OnInit{
     id: string;
     strid: string;
     contact: Contact;
+    contactData: Contact;
     groupContacts: Contact[] = [];
     nativeWindow: any;
 
@@ -28,9 +29,11 @@ export class ContactDetailComponent implements OnInit{
     .subscribe(
       (params: Params) => {
         this.id = params['id'];
-        // this.id = "48";
-        // console.log(this.id);
-        this.contact = this.contactService.getContact(this.id);
+        this.contactService.getContact(this.id)
+        .subscribe(contactData => {
+          this.contact = contactData.contact;
+        });
+        //this.id = "48";
       }
     );
     if (this.contact.group){

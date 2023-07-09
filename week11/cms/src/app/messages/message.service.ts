@@ -19,12 +19,16 @@ export class MessageService {
   messageChangedEvent = new EventEmitter<Message[]>();
   messageListChanged = new Subject<Message[]>();
   maxMessageId: number;
+  laynesId: string;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {};
   // this.docsArray = MOCKMESSAGES;
  // this.docsArray = this.getMessages();
-}
-  // console.log('Constructor mongoDocs =', this.docsArray);
+// }
+// OnInit () {
+//   this.getMessages()
+// }
+//   // console.log('Constructor mongoDocs =', this.docsArray);
   //  this.jsondocs = this.getMessages();
   // this.docsArray = this.getMessages();
 
@@ -66,7 +70,7 @@ export class MessageService {
       .subscribe((docs) => {
        this.messages = docs.messages;
        //console.log("getDocuuments mongoDocs =", this.docsArray.slice());
-         this.maxMessageId = this.getMaxMessageId();
+       //  this.maxMessageId = this.getMaxMessageId();
        // Alphabetical Sort
         this.messages.sort((a, b) => {
           if (a.sender < b.sender) {
@@ -78,8 +82,9 @@ export class MessageService {
           return 0;
         });
         // console.log("Returned:", this.docsArray);
-        console.log(this.messages);
-        this.messageListChanged.next(this.messages.slice());
+       // console.log(this.messages);
+        // this.messageListChanged.next(this.messages.slice());
+        this.messageListChanged.next(this.messages);
       });
      // console.log(this.docsArray.slice());
      // console.log("Returned Slice:", this.docsArray);
@@ -89,23 +94,25 @@ export class MessageService {
   getMessage(id: string): Message {
     for (const message of this.messages) {
       if (message.id == id) {
-        //console.log("found!")
+       console.log(id)
         return message;
       }
     }
     return null;
   }
+
   addMessage(message: Message) {
+    // console.log(message)
+    this.laynesId = "101";
+    message.id = "101" ;
     if (!message) {
       return;
     }
 
-    // make sure id of the new Message is empty
-    message.id = '';
-
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // add to database
+     message.id = "101";
     this.httpClient
       .post<{ messages: string; message: Message }>(
         'http://localhost:3000/messages',
@@ -113,9 +120,13 @@ export class MessageService {
         { headers: headers }
       )
       .subscribe((responseData) => {
-        // add new message to docsArray
+        // add new message to msgArray
+        console.log(responseData.message);
+        responseData.message.id = "101";
         this.messages.push(responseData.message);
+        responseData.message.id = "101";
         this.sortAndSend();
+        responseData.message.id = "101";
       });
   }
 
@@ -145,35 +156,35 @@ export class MessageService {
   //   this.storeMessages();
   // }
 
-  updateMessage(originalMessage: Message, newMessage: Message) {
-    if (!originalMessage || !newMessage) {
-      return;
-    }
+  // updateMessage(originalMessage: Message, newMessage: Message) {
+  //   if (!originalMessage || !newMessage) {
+  //     return;
+  //   }
 
-    const pos = this.messages.findIndex((d) => d.id === originalMessage.id);
+  //   const pos = this.messages.findIndex((d) => d.id === originalMessage.id);
 
-    if (pos < 0) {
-      return;
-    }
+  //   if (pos < 0) {
+  //     return;
+  //   }
 
-    // set the id of the new Message to the id of the old Message
-    newMessage.id = originalMessage.id;
-    // newMessage._id = originalMessage._id;
+  //   // set the id of the new Message to the id of the old Message
+  //   newMessage.id = originalMessage.id;
+  //   // newMessage._id = originalMessage._id;
 
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    // update database
-    this.httpClient
-      .put(
-        'http://localhost:3000/messages/' + originalMessage.id,
-        newMessage,
-        { headers: headers }
-      )
-      .subscribe((response: Response) => {
-        this.messages[pos] = newMessage;
-        this.sortAndSend();
-      });
-  }
+  //   // update database
+  //   this.httpClient
+  //     .put(
+  //       'http://localhost:3000/messages/' + originalMessage.id,
+  //       newMessage,
+  //       { headers: headers }
+  //     )
+  //     .subscribe((response: Response) => {
+  //       this.messages[pos] = newMessage;
+  //       this.sortAndSend();
+  //     });
+  // }
 
   // deleteMessage(message: Message) {
   //   if (!message) {
@@ -239,6 +250,7 @@ export class MessageService {
       }
       return 0;
     });
-    this.messageListChanged.next(this.messages.slice());
+    // console.log(this.messages.slice);
+    this.messageListChanged.next(this.messages);
   }
 }

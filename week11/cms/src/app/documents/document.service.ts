@@ -78,7 +78,7 @@ export class DocumentService {
           return 0;
         });
         // console.log("Returned:", this.docsArray);
-        console.log(this.documents);
+        // console.log(this.documents);
         this.documentListChanged.next(this.documents.slice());
       });
      // console.log(this.docsArray.slice());

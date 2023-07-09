@@ -56,7 +56,6 @@ import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
     HttpClientModule
     // DndModule.forRoot()
   ],
-  providers: [ContactService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

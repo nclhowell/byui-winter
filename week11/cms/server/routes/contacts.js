@@ -7,7 +7,7 @@ module.exports = router;
 //Get
 router.get("/", (req, res, next) => {
   Contact.find()
-   // .populate("group")
+    // .populate("group")
     .then((contacts) => {
       res.status(200).json({
         message: "Contact snagged successfully",
@@ -16,11 +16,53 @@ router.get("/", (req, res, next) => {
     })
     .catch((error) => {
       res.status(500).json({
-        message: "Broken Contact Fetch",
+        message: "Broken Contacts Fetch",
         error: error,
       });
     });
 });
+
+router.get("/:id", (req, res, next) => {
+  Contact.findOne(
+   {
+    "id": req.params.id
+   }
+  )
+    .populate("group")
+    .then((contact) => {
+      res.status(200).json({
+        message: "Contact snagged successfully",
+        contact: contact,
+      });
+    })
+    .catch((error) => {
+      res.status(500).json({
+        message: "Broken Contact Fetch",
+        error: error,
+      });
+    });
+})
+
+// router.get("/:id", (req, res, next) => {
+//   Contact.findOne({
+//     "id": req.params.id
+//   })
+//     .populate("group")
+//     .then((contact) => {
+//       res
+//       .status(200)
+//       .json({
+//         message: "Contact snagged successfully",
+//         contact: contact,
+//       });
+//     })
+//     .catch((error) => {
+//       res.status(500).json({
+//         message: "Broken Contact Fetch",
+//         error: error,
+//       });
+//     });
+// });
 
 //Post
 router.post("/", (req, res, next) => {

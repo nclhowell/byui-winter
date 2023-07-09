@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Contact } from './contact.model';
-import { MOCKCONTACTS } from './MOCKCONTACTS';
+// import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { json } from 'body-parser';
 import { response } from 'express';
 
@@ -10,64 +10,26 @@ import { response } from 'express';
   providedIn: 'root',
 })
 export class ContactService {
-  // mongoURIdocsArray: string = "https://wdd430cms0-default-rtdb.firebaseio.com/contacts.json";
+  // firebaseURIdocsArray: string = "https://wdd430cms0-default-rtdb.firebaseio.com/contacts.json";
   mongoURIdocsArray: string = 'http://localhost:3000/contacts';
- // jsondocs: Contact[] = [];
- contacts: Contact[] = [];
- //  docsArray: Contact[] = MOCKCONTACTS;
+  // jsondocs: Contact[] = [];
+  contacts: Contact[] = [];
+  contact: Contact;
+  message: string = 'generic message';
+  //  docsArray: Contact[] = MOCKCONTACTS;
   contactSelectedEvent = new EventEmitter<Contact>();
   contactChangedEvent = new EventEmitter<Contact[]>();
   contactListChanged = new Subject<Contact[]>();
   maxContactId: number;
 
-  constructor(private httpClient: HttpClient) {
-  // this.docsArray = MOCKCONTACTS;
- // this.docsArray = this.getContacts();
-}
-  // console.log('Constructor mongoDocs =', this.docsArray);
-  //  this.jsondocs = this.getContacts();
-  // this.docsArray = this.getContacts();
-
-
-   // console.log('mockDocs = ', this.docsArray);
-   // console.log("Web Docs Array = ", this.webdocsArray);
-   // this.maxContactId = this.getMaxContactId();
-   // console.log("Max Doc ID =", this.maxContactId);
-
-  // getContacts() {
-  //   this.httpClient
-  //     .get<{ message: string; docsArray: Contact[] }>(this.mongoURIdocsArray)
-  //     .subscribe((docsArrayData) => {
-  //       console.log('It works!');
-  //       this.docsArray = docsArrayData.docsArray;
-  //       response.status(200).json({
-  //         message: 'Docs fetched successfully'
-  //          docsArray: docsArray });
-  //       });
-
-        //sortAndSend() {
-        // this.docsArray.sort((a, b) => {
-        //   if (a.name < b.name) {
-        //     return -1;
-        //   }
-        //   if (a.name > b.name) {
-        //     return 1;
-        //   }
-        //   return 0;
-        // });
-  //       this.contactListChanged.next(this.docsArray.slice());
-  //     });
-  // }
+  constructor(private http: HttpClient) {}
 
   getContacts() {
-    this.httpClient
-      .get<{message: string, contacts: Contact[]}>(this.mongoURIdocsArray)
-      // .get<Contact[]>(this.mongoURIdocsArray)
+    this.http
+      .get<{ message: string; contacts: Contact[] }>(this.mongoURIdocsArray)
       .subscribe((docs) => {
-       this.contacts = docs.contacts;
-       //console.log("getDocuuments mongoDocs =", this.docsArray.slice());
-         this.maxContactId = this.getMaxContactId();
-       // Alphabetical Sort
+        this.contacts = docs.contacts;
+        this.maxContactId = this.getMaxContactId();
         this.contacts.sort((a, b) => {
           if (a.name < b.name) {
             return -1;
@@ -77,24 +39,27 @@ export class ContactService {
           }
           return 0;
         });
-        // console.log("Returned:", this.docsArray);
-        console.log(this.contacts);
+       // console.log(this.contacts);
         this.contactListChanged.next(this.contacts.slice());
       });
-     // console.log(this.docsArray.slice());
-     // console.log("Returned Slice:", this.docsArray);
-     return this.contacts.slice();
+    return this.contacts.slice();
   }
 
-  getContact(id: string): Contact {
-    for (const contact of this.contacts) {
-      if (contact.id == id) {
-        //console.log("found!")
-        return contact;
-      }
-    }
-    return null;
+  getContact(id: string) {
+    return this.http.get<{ message: string; contact: Contact }>('http://localhost:3000/contacts/' + id);
   }
+  // getContact(id: string): Contact {
+
+  //   for (const contact of this.contacts) {
+  //     if (contact.id == id) {
+
+  //       //console.log("found!")
+  //       return contact;
+  //     }
+  //   }
+  //   return null;
+  // }
+
   addContact(contact: Contact) {
     if (!contact) {
       return;
@@ -106,7 +71,7 @@ export class ContactService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // add to database
-    this.httpClient
+    this.http
       .post<{ message: string; contact: Contact }>(
         'http://localhost:3000/contacts',
         contact,
@@ -163,12 +128,10 @@ export class ContactService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     // update database
-    this.httpClient
-      .put(
-        'http://localhost:3000/contacts/' + originalContact.id,
-        newContact,
-        { headers: headers }
-      )
+    this.http
+      .put('http://localhost:3000/contacts/' + originalContact.id, newContact, {
+        headers: headers,
+      })
       .subscribe((response: Response) => {
         this.contacts[pos] = newContact;
         this.sortAndSend();
@@ -199,7 +162,7 @@ export class ContactService {
     }
 
     // delete from database
-    this.httpClient
+    this.http
       .delete('http://localhost:3000/contacts/' + contact.id)
       .subscribe((response: Response) => {
         this.contacts.splice(pos, 1);
@@ -208,7 +171,6 @@ export class ContactService {
   }
 
   getMaxContactId(): number {
-    //return this.docsArray.sort(d=>d.id)[0];
     let maxId = 0;
     for (const contact of this.contacts) {
       if (+contact.id > maxId) {
@@ -219,7 +181,7 @@ export class ContactService {
   }
 
   storeContacts() {
-    this.httpClient
+    this.http
       .put(this.mongoURIdocsArray, JSON.stringify(this.contacts), {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
       })

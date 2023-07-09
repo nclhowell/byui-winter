@@ -11,7 +11,7 @@ import { ContactListComponent } from './contacts/contact-list/contact-list.compo
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component'
 
 const appRoutes: Routes = [
-// Message Routes
+// Document Routes
  { path: '', redirectTo: '/documents', pathMatch: 'full' },
   { path: 'documents', component: DocumentsComponent, children: [
     { path: '', component: DocumentListComponent },
@@ -19,6 +19,7 @@ const appRoutes: Routes = [
     { path: ':id', component: DocumentDetailComponent },
     { path: ':id/edit', component: DocumentEditComponent },
   ] },
+// Message Routes
   { path: 'messages', component: MessageListComponent},
 // Contact Routes
   { path: 'contacts', component: ContactsComponent, children: [

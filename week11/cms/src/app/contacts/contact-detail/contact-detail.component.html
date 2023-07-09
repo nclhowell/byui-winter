@@ -1,11 +1,11 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <div class="col-xs-12">
-      <h1>{{ contact.name }}</h1>
+      <h1>{{ contact?.name }}</h1>
       <span class="pull-left">
         <img
-          [src]="contact.imageUrl"
-          alt="{{ contact.name }}"
+          [src]="contact?.imageUrl"
+          alt="{{ contact?.name }}"
           class="img-responsive"
           style="max-height: 100px"
         />
@@ -23,8 +23,8 @@
   <div layout="row" class="panel-body">
     <form class="form-horizontal">
       <div class="mx-auto">
-        <h4>{{ "Email: " + contact.email }}</h4>
-        <h4>{{ "Phone: " + contact.phone }}</h4>
+        <h4>{{ "Email: " + contact?.email }}</h4>
+        <h4>{{ "Phone: " + contact?.phone }}</h4>
       </div>
       <div class="form-group">
          <app-contact-item

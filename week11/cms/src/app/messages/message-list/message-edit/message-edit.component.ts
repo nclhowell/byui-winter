@@ -7,7 +7,9 @@ import {
   Output,
 } from '@angular/core';
 import { Message } from '../../message.model';
+import { Contact } from '../../../contacts/contact.model';
 import { MessageService } from '../../message.service';
+import { ContactService } from '../../../contacts/contact.service';
 
 @Component({
   selector: 'app-message-edit',
@@ -16,19 +18,35 @@ import { MessageService } from '../../message.service';
 })
 export class MessageEditComponent implements OnInit {
   messages: Message[];
-  currentSender = '18';
+  currentContact: Contact;
+  currentSender: Contact;
+  // currentSender = '101';
+  currentSenderName: string;
+  currentContactObjectId: string;
   @ViewChild('subjectInput', { static: false }) subjectInputRef: ElementRef;
   @ViewChild('msgTextInput', { static: false }) msgTextInputRef: ElementRef;
   // @Output() messageAdded = new EventEmitter<Message>();
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService, private contactService: ContactService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+this.contactService.getContact("101")
+.subscribe(
+  response => {
+    this.currentSender = response.contact;
+    this.currentSenderName = response.contact.id;
+    this.currentContact = response.contact;
+    this.currentContactObjectId = response.contact.id;
+  }
+)
+  }
 
   addMessage() {
     const subject = this.subjectInputRef.nativeElement.value;
     const msgText = this.msgTextInputRef.nativeElement.value;
-    const newMessage = new Message("99", subject, msgText, this.currentSender);
+    // const newMessage = new Message(null, "101", subject, msgText, this.currentContact);
+    const newMessage = new Message("101", subject, msgText, this.currentSender);
+    // console.log(newMessage);
     // this.messageAdded.emit(newMessage);
     this.messageService.addMessage(newMessage);
   }

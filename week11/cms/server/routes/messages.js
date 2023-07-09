@@ -8,6 +8,7 @@ module.exports = router;
 //Get
  router.get('/', (req, res, next) => {
  Message.find()
+.populate("sender")
       .then(messages => {
           res.status(200).json({
           message: 'Message snagged successfully',
@@ -27,7 +28,8 @@ module.exports = router;
 router.post('/', (req, res, next) => {
   const maxMessageId = sequenceGenerator.nextId("messages");
   const message = new Message({
-    id: maxMessageId,
+    // id: maxMessageId,
+    id: req.body.id,
     subject: req.body.subject,
     msgText: req.body.msgText,
     sender: req.body.sender

@@ -9,4 +9,4 @@ const documentSchema = mongoose.Schema(
     required: false, ref:'Document'}]
 }
 );
-module.exports = mongoose.model('document', documentSchema);
+module.exports = mongoose.model('Document', documentSchema);
