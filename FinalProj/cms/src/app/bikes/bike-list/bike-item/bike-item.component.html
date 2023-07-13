@@ -1,0 +1,24 @@
+<a
+  class="list-group-item clearfix documentDiv justify-content-between"
+  routerLink="./{{ bike.id }}"
+  routerLinkActive="active"
+>
+ <div>
+    <span class="pull-left">
+      <img
+        [src]="bike.url"
+        alt="{{ bike.manufacturer }}"
+        class="img-responsive"
+        style="max-height: 50px"
+      />
+    </span>
+  </div>
+  <div class="pull-left">
+    <p class="list-group-item-heading">{{ bike.manufacturer }}</p>
+  </div>
+  <br>
+  <div class="pull-right">
+    <p>{{ bike.model }}</p>
+  </div>
+
+</a>

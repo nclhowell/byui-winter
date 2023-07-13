@@ -1,0 +1,39 @@
+<!-- <div class="panel panel-default"> -->
+  <div class="panel-heading">
+    <div class="row">
+      <h2 class="title pad-left-right">Mountain Bike Builder</h2>
+    </div>
+    <div class="row">
+      <div class="input-group pull-left pad-left-right col-xs-7">
+        <input
+          class="form-control"
+          #searchBox
+          (keyup)="search(searchBox.value)"
+          placeholder="Enter a manufacturer"
+        />
+        <div
+          class="glyphicon glyphicon-search input-group-addon"
+          (click)="search(searchBox.value)"
+        ></div>
+      </div>
+    </div>
+    <div class="row">
+    <div class="pull-left pad-leftright">
+      <br>
+      <!-- <a class="btn btn-success" [routerLink]="['new']">New Bike</a>  -->
+      <a class="btn btn-success" routerLink="new">Add New Bike</a>
+    </div>
+  </div>
+</div>
+
+<div class="panel-body">
+  <div class="row">
+    <div class="col-xs-8">
+      <app-bike-item
+      *ngFor="let bikeEl of bikes |  bikesFilter: term"
+      [bike]="bikeEl"
+    >
+    </app-bike-item>
+    </div>
+  </div>
+<!-- </div> -->

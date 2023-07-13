@@ -1,0 +1,139 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form id="bike-edit"  #f="ngForm">
+        <div class="row">
+        <div class="col-sm-12 form-group">
+          <input
+            type="hidden"
+            name="id"
+            ngModel
+            [ngModel]="id"
+            id="id"
+            class="form-control"
+            size="120"
+            max="120"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="manufacturer">Manufacturer:</label>
+          <input
+            type="text"
+            name="manufacturer"
+            ngModel
+            [ngModel]="bike?.manufacturer"
+            id="manufacturer"
+            class="form-control"
+            required
+            size="120"
+            max="120"
+            [placeholder]="tdocManufacturer"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="model">Model:</label>
+          <input
+            type="text"
+            name="model"
+            #model="ngModel"
+            ngModel
+            [ngModel]="bike?.model"
+            id="model"
+            class="form-control required"
+            size="120"
+            max="255"
+            [placeholder]="tdocModel"
+           pattern="^(?:Dude).*"
+          />
+
+           <!-- pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" -->
+          <div *ngIf="model.invalid && model.touched" class="text-danger"><br>Invalid Model Entry!!</div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="terrainType">Terraintype:</label>
+          <input
+            type="text"
+            name="terrainType"
+            #terrainType="ngModel"
+            ngModel
+            [ngModel]="bike?.terrainType"
+            id="terrainType"
+            class="form-control invalid"
+            size="150"
+            max="255"
+            [placeholder]="tdocTerrainType"
+            pattern="^(?:Gnarly).*"
+          />
+          <div *ngIf="terrainType.invalid && terrainType.touched" class="text-danger"><br>Invalid Terraintype Number Entry!!!</div>
+        </div>
+      </div>
+       <div
+      class="alert alert-danger"
+      *ngIf="f.form.controls.status" >
+      The Document Manufacturer and Document Model are required fields
+    </div>
+
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <label for="url">Image URL:</label>
+          <input
+            type="text"
+            name="url"
+            ngModel
+            [ngModel]="bike?.url"
+            id="url"
+            class="form-control"
+            size="150"
+            max="255"
+            [placeholder]="tdocUrl"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <!-- <label for="groupList">Group Bikes:</label>
+          <div class="row" id="grouplist" style="min-height: 3rem">
+            <div *ngfor="let bike of groupbikes; let i = index">
+              <div>
+                <cms-bike-item
+                  class="col-sm-11"
+                  [bike]="bike"
+                ></cms-bike-item>
+                <button
+                  class="btn btn-danger col-sm-2 deleteButton"
+                  (click)="onRemoveItem(i)"
+                >
+                  X
+                </button>
+              </div>
+            </div>
+            <span class="dragMsg" *ngIf="groupBikes?.length < 1"
+              >Drag bikes in group here</span
+            >
+          </div> -->
+        </div>
+      </div>
+      <div
+      class="alert alert-danger"
+      *ngIf="!model || !manufacturer" >
+      The Manufacturer and Model are required fields
+    </div>
+      <div class="row">
+        <div class="col-xs-12 btn-toolbar">
+          <button class="btn btn-success" type="submit" (click)="onSubmit(f)">Save</button>
+          <button class="btn btn-primary" type="button" (click)="onCancel()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+[{
+"id": "1",
+"manufacturer": "Trek",
+"model": "2100",
+"url": "",
+"gender":"unisex",
+"surfaceType": "black-diamond",
+"terrainType": "dirt",
+"terrainLevel": "difficult",
+"wheelSize": "27.5",
+"funFactor": "high"
+},{
+"id": "2",
+"manufacturer": "Specialized",
+"model": "enduro",
+"url": "",
+"gender":"unisex",
+"surfaceType": "blue",
+"terrainType": "dirt",
+"terrainLevel": "intermediate",
+"wheelSize": "27.5",
+"funFactor": "high"
+},{
+"id": "3",
+"manufacturer": "Walmart",
+"model": "breakfix 200",
+"url": "",
+"gender":"unisex",
+"surfaceType": "bikepath",
+"terrainType": "gravel",
+"terrainLevel": "easy",
+"wheelSize": "29",
+"funFactor": "low"
+},{
+"id": "4",
+"manufacturer": "Schwinn",
+"model": "Trainer 300",
+"url": "",
+"gender":"unisex",
+"surfaceType": "bikepath",
+"terrainType": "pavement",
+"terrainLevel": "easy",
+"wheelSize": "29",
+"funFactor": "medium"
+},{
+"id": "5",
+"manufacturer": "Pivot",
+"model": "Dudecylce 40",
+"url": "",
+"gender":"unisex",
+"surfaceType": "downhill",
+"terrainType": "dirt",
+"terrainLevel": "extreme",
+"wheelSize": "27.5",
+"funFactor": "high"
+},{
+"id": "6",
+"manufacturer": "Intense",
+"model": "m16",
+"url": "",
+"gender":"unisex",
+"surfaceType": "bikepark",
+"terrainType": "dirt",
+"terrainLevel": "difficult",
+"wheelSize": "27.5",
+"funFactor": "high"
+}]

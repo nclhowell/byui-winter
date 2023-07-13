@@ -1,0 +1,12 @@
+ /* div list-group-item-heading {
+  background-color: white;
+} */
+ /* div h4 {
+  background-color: white;
+} */
+
+div, h4, p, img {
+   background-color: white;
+   text-align: justify;
+
+}
